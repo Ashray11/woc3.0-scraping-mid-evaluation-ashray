@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <p id="site" style=
+            "font-size: 15px; font-weight: bold;">
+    </p>
+</head>
+<body>
+
+<script type="text/javascript">
+    const text = window.location.hash.substring(1);
+    const text_up = document.getElementById("site");
+    text_up.innerHTML = text + " Product Web Scraper";
+
+    function handle() {
+        const url = document.getElementById("url").value;
+        const cost = document.getElementById("cost").value;
+        const mail = document.getElementById("mail").value;
+
+        let data = url + "," + cost + "," + mail;
+        const a = document.createElement('a');
+        const file = new Blob([data], {type: 'text/plain'});
+        a.href = URL.createObjectURL(file);
+        a.download = 'info.txt';
+        a.click();
+        URL.revokeObjectURL(a.href);
+    }
+</script>
+
+<form action="JavaScript:handle()" method="get" id="form1">
+    <label for="url">URL</label>
+    <input type="url" id="url" name="url" placeholder="Enter Product URL" required>
+    <label for="cost">Price</label>
+    <input type="number" id="cost" name="cost" placeholder="Enter Desired Amount" required>
+    <label for="mail">Email</label>
+    <input type="email" id="mail" name="mail" placeholder="Enter Email ID" required>
+</form>
+<button type="submit" form="form1" value="Submit">Submit</button>
+
+</body>
+</html>
